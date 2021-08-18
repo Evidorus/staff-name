@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const nameModel = require("./models/staffs");
+const nameModel = require("./staffs");
 
 mongoose.connect(
   "mongodb://localhost:27017/staffs",
@@ -9,9 +9,9 @@ mongoose.connect(
   }
 );
 
-async function createRestaurants() {
-  await nameModel.deleteMany({}).exec();
-  const names = nameModel.create([
+async function createNames() {
+  //await nameModel.deleteMany({}).exec();
+  const names = await nameModel.create([
     {
       name: "Eleftheria",
     },
@@ -29,4 +29,4 @@ async function createRestaurants() {
 
 console.log(names);
 
-createRestaurants();
+createNames();

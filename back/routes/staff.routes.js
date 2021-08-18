@@ -2,21 +2,21 @@ let mongoose = require("mongoose"),
   express = require("express"),
   router = express.Router();
 
-let staff = require("../models/staffs");
+let nameModel = require("../models/staffs");
 
 router.route("/create").post((req, res, next) => {
-  staff.create(req.body, (error, data) => {
+  nameModel.create(req.body, (error, data) => {
     if (error) {
       return next(error);
     } else {
-      console.log(data);
-      res.json(data);
+      console.log("user created" + data);
+      res.json("user created" + data);
     }
   });
 });
 
 router.route("/").get((req, res) => {
-  staff.find((error, data) => {
+  nameModel.find((error, data) => {
     if (error) {
       return next(error);
     } else {
@@ -26,7 +26,7 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/edit/:id").get((req, res) => {
-  staff.findById(req.params.id, (error, data) => {
+  nameModel.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error);
     } else {

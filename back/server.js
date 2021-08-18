@@ -4,13 +4,11 @@ let cors = require("cors");
 let bodyParser = require("body-parser");
 let database = require("./database/db");
 
-const userRoute = require("../back/routes/staff.routes");
+const staffRoute = require("../back/routes/staff.routes");
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect(database.db, {
-    useNewUrlParser: true,
-  })
+  .connect(database.db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(
     () => {
       console.log("Database connected sucessfully !");
@@ -28,7 +26,7 @@ app.use(
   })
 );
 app.use(cors());
-app.use("/", userRoute);
+app.use("/Staffs", staffRoute);
 
 const port = process.env.PORT || 8000;
 const server = app.listen(port, () => {
