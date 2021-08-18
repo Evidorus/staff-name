@@ -11,7 +11,7 @@ mongoose.connect(
 
 async function createNames() {
   await nameModel.deleteMany({}).exec();
-  nameModel.create([
+  const tables = nameModel.create([
     {
       name: "Eleftheria",
     },
@@ -26,5 +26,7 @@ async function createNames() {
     },
   ]);
 }
+
+console.log(names);
 
 createNames();

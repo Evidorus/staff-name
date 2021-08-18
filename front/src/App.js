@@ -10,8 +10,8 @@ function App() {
     <Router>
       <div className='App'>
         <header>
-          <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
-            <a className='navbar-brand'>Add an Argonaute</a>
+          <nav className='navbar navbar-expand-lg navbar-dark'>
+            <a className='navbar-brand brand-name'>Add an Argonaute</a>
             <div
               className='collapse navbar-collapse'
               id='navbarSupportedContent'>

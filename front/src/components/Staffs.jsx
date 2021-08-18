@@ -4,7 +4,7 @@ export default class Users extends Component {
   render() {
     return (
       <div>
-        <p>Argonaute List</p>
+        <p>Members</p>
       </div>
     );
   }

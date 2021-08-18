@@ -1,59 +1,65 @@
-import React, { Component } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { useHistory } from "react-router";
+import Staffs from "./Staffs";
 
-export default class CreateStaff extends Component {
-  constructor(props) {
-    super(props);
+const AddStaff = (props) => {
+  const [name, setName] = useState("");
+  const history = useHistory();
 
-    this.onChangeUserName = this.onChangeUserName.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  /*   const handleSubmit = (event) => {
+    console.log(`
+      name: ${name}
+    `);
 
-    this.state = {
-      name: "",
-    };
-  }
+    event.preventDefault();
+  }; */
 
-  onChangeUserName(e) {
-    this.setState({ name: e.target.value });
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-
-    const userObject = {
-      name: this.state.name,
-    };
-
-    axios()
-      .post("http://localhost:8000/staffs/create", userObject)
-      .then((res) => {
-        console.log(res.data);
+  const addStaff = () => {
+    fetch("http://localhost:8000/staffs", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+      }),
+    })
+      .then((response) => {
+        return response.json();
       })
-      .catch((error) => {
-        console.log(error);
+      .then((response) => {
+        console.log(response);
+        history.push(`/Staffs/${response.name}`);
       });
+  };
 
-    this.setState({ name: "" });
-  }
+  return (
+    <div>
+      <form>
+        <h1>Add a name</h1>
 
-  render() {
-    return (
-      <div className='wrapper'>
-        <form>
-          <div className='form-group'>
-            <label>Enter Name</label>
-            <input type='text' className='form-control' />
-          </div>
+        <label>
+          Name:
+          <input
+            name='name'
+            type='text'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                addStaff();
+              }
+            }}
+            required
+          />
+        </label>
 
-          <div className='form-group'>
-            <input
-              type='submit'
-              value='Create Staff'
-              className='btn btn-success btn-block'
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+        <button onClick={addStaff}>Submit</button>
+      </form>
+      <p>Argonaute List</p>
+      <Staffs />
+    </div>
+  );
+};
+
+export default AddStaff;
