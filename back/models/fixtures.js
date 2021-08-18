@@ -10,8 +10,8 @@ mongoose.connect(
 );
 
 async function createNames() {
-  //await nameModel.deleteMany({}).exec();
-  const names = await nameModel.create([
+  await nameModel.deleteMany({}).exec();
+  nameModel.create([
     {
       name: "Eleftheria",
     },
@@ -26,7 +26,5 @@ async function createNames() {
     },
   ]);
 }
-
-console.log(names);
 
 createNames();

@@ -24,7 +24,7 @@ export default class CreateStaff extends Component {
       name: this.state.name,
     };
 
-    axios
+    axios()
       .post("http://localhost:8000/staffs/create", userObject)
       .then((res) => {
         console.log(res.data);
